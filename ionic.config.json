@@ -1,0 +1,7 @@
+{
+  "name": "PawChart",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
