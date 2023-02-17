@@ -16,7 +16,9 @@ const Home: React.FC = () => {
             <IonTitle size="large">Blank</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <Search />
+        <Search onSearch={function (query: string): void {
+          throw new Error('Function not implemented.');
+        } }/>
       </IonContent>
     </IonPage>
   );

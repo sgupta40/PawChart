@@ -22,21 +22,37 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import React, { useState } from 'react';
+import Search from './components/Search';
+import isSafeForDogs from './components/isSafeForDogs';
+
 setupIonicReact();
 
-const App: React.FC = () => (
-  <IonApp>
-    <IonReactRouter>
-      <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
-        </Route>
-      </IonRouterOutlet>
-    </IonReactRouter>
-  </IonApp>
-);
+const App: React.FC = () => {
+  const [result, setResult] = useState<boolean | null>(null);
+
+  const handleSearch = (query: string) => {
+    const safeForDogs = isSafeForDogs(query);
+
+    setResult(safeForDogs);
+  };
+
+  return (
+    <IonPage>
+      <IonHeader>
+        <IonToolbar>
+          <IonTitle>Is it safe for dogs?</IonTitle>
+        </IonToolbar>
+      </IonHeader>
+      <IonContent>
+        <Search onSearch={handleSearch} />
+        {result !== null && (
+          <p>{result ? 'Yes, it is safe for dogs to eat!' : 'No, it is not safe for dogs to eat!'}</p>
+        )}
+      </IonContent>
+    </IonPage>
+  );
+};
 
 export default App;

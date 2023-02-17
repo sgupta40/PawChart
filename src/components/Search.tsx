@@ -1,14 +1,29 @@
-import './Search.css';
+import { IonSearchbar } from '@ionic/react';
+import React, { useState } from 'react';
 
-interface ContainerProps { }
+interface SearchProps {
+  onSearch: (query: string) => void;
+}
 
-const Search: React.FC<ContainerProps> = () => {
+const Search: React.FC<SearchProps> = ({ onSearch }) => {
+  const [query, setQuery] = useState<string>('');
+
+  const handleSearch = () => {
+    onSearch(query);
+  };
+  
+
   return (
-    <div className="container">
-        <body>
-            <text>"Hello"</text>
-        </body>
-    </div>
+    <IonSearchbar
+      value={query}
+      onIonChange={(e) => setQuery(e.detail.value!)}
+      onKeyUp={(e) => {
+        if (e.key === 'Enter') {
+          handleSearch();
+        }
+      }}
+      placeholder="Enter a food item"
+    />
   );
 };
 
