@@ -27,6 +27,8 @@ import React, { useState } from 'react';
 import Search from './components/Search';
 import isSafeForDogs from './components/isSafeForDogs';
 
+import './App.css';
+
 setupIonicReact();
 
 const App: React.FC = () => {
@@ -52,6 +54,7 @@ const App: React.FC = () => {
         )}
       </IonContent>
     </IonPage>
+    
   );
 };
 
